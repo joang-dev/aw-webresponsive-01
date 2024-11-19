@@ -32,10 +32,19 @@ body {
     }
 }
 
-.noNav {
+body#noNav {
     grid-template-rows: min-content 0 1fr;
+        
+    @media (width <= 900px) {
+        grid-template-columns: 1fr; /* Cambia a una sola columna */
+        grid-template-rows: min-content 1fr; /* Ajusta el layout */
+        grid-template-areas: 
+            "header"
+            "main";
+    }
 
     & .page-nav, & .page-nav li {
+        display: none;
         padding: 0;
         margin: 0;
     }
@@ -72,12 +81,19 @@ a {
     & .menu-icon {
         aspect-ratio: 1;
         width: 30px;
+        box-shadow: none;
+        transition: opacity .3s ease;
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+    & .menu-icon.active {
+        box-shadow: 5px 5px 5px black;
     }
 
 }
 
 .page-nav {
-    display: none;
     height: 100%;
     overflow: hidden;
     background-color: #222;
@@ -87,6 +103,7 @@ a {
     display: flex;
     /* flex-direction: column; */
     justify-content: space-around;
+    transition: width .3s ease;
 
     & a {
         color: white;
@@ -98,7 +115,7 @@ a {
         gap: 20px;
 
         & > li {
-            font-size: 14px;
+            font-size: 16px;
             display: flex;
             align-items: center;
             gap: 20px;
@@ -156,6 +173,9 @@ a {
 @media (width <= 900px) {
      .page-nav {
         justify-content: space-between;
+        & li > a {
+            font-size: 14px;
+        }
     }
 
     .page-nav, .page-nav > ul, .page-nav .reg-buttons {
@@ -166,6 +186,14 @@ a {
 .main-content {
     grid-area: main;
     padding: 20px;
+    & .intro-title {
+        font-size: 50px;
+        margin: 30px 0;
+    }
+
+    & .text-container {
+        margin: 0 auto;
+    }
 }
 
 
