@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url(fonts.css);
 
 :root {
     --primary-blue: #1a3486;
@@ -21,6 +21,24 @@ body {
         "nav"
         "main"
     ;
+
+    @media (width <=900px) {
+        grid-template-columns: 1fr 200px;
+        grid-template-rows: min-content 1fr;
+        grid-template-areas: 
+            "header header"
+            "main nav"
+        ;
+    }
+}
+
+.noNav {
+    grid-template-rows: min-content 0 1fr;
+
+    & .page-nav, & .page-nav li {
+        padding: 0;
+        margin: 0;
+    }
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -59,11 +77,12 @@ a {
 }
 
 .page-nav {
+    display: none;
     height: 100%;
+    overflow: hidden;
     background-color: #222;
     grid-area: nav;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 30px 0;
     font-weight: 200;
     display: flex;
     /* flex-direction: column; */
@@ -107,26 +126,35 @@ a {
             border-radius: 30px;
             padding: 10px 15px;
             text-align: center;
-            transition: all .3s ease;
+            transition: all .5s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
             &:not(:active):hover {
-                background-color: white;
                 color: var(--primary-blue);
+            }
+
+            &:not(:active):hover::before {
+                transform: translateX(100%);
+            }
+
+            &::before {
+                content: "";
+                width: 100%;
+                height: 100%;
+                background-color: white;
+                transition: transform .5s ease;
+                position: absolute;
+                top: 0;
+                right: 100%;
+                z-index: -1;
             }
         }
     }
 
 }
 @media (width <= 900px) {
-    body {
-        grid-template-columns: 1fr 200px;
-        grid-template-rows: min-content 1fr;
-        grid-template-areas: 
-            "header header"
-            "main nav"
-        ;
-    }
-
-    .page-nav {
+     .page-nav {
         justify-content: space-between;
     }
 
