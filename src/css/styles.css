@@ -13,40 +13,37 @@
 body {
     min-height: 100dvh;
     font-family: "Poppins", "sans-serif";
+    overflow-x: hidden;
     font-weight: 300;
     display: grid;
-    grid-template-rows: repeat(2, min-content) 1fr;
-    grid-template-areas: 
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content auto 1fr;
+    grid-template-areas:
         "header"
         "nav"
         "main"
     ;
 
     @media (width <=900px) {
-        grid-template-columns: 1fr 200px;
+        grid-template-columns: 1fr auto;
         grid-template-rows: min-content 1fr;
-        grid-template-areas: 
+        grid-template-areas:
             "header header"
             "main nav"
         ;
+
+        & .page-nav {
+            height: calc(100dvh - 75px);
+            width: 0;
+        }
     }
 }
 
-body#noNav {
-    grid-template-rows: min-content 0 1fr;
-        
-    @media (width <= 900px) {
-        grid-template-columns: 1fr; /* Cambia a una sola columna */
-        grid-template-rows: min-content 1fr; /* Ajusta el layout */
-        grid-template-areas: 
-            "header"
-            "main";
-    }
-
-    & .page-nav, & .page-nav li {
-        display: none;
-        padding: 0;
-        margin: 0;
+body:has(#pageNavToggle:checked) {
+    /* grid-template-rows: repeat(2, min-content) 1fr; */
+    & .page-nav {
+        height: 100px;
+        padding: 30px 0;
     }
 }
 
@@ -56,6 +53,7 @@ h1,h2,h3,h4,h5,h6 {
 
 a {
     text-decoration: none;
+    color: currentColor;
 }
 
 .page-header {
@@ -76,10 +74,24 @@ a {
     & .page-logo {
         object-fit: contain;
         height: 100%;
+
+        &:hover {
+            filter: saturate(300%);
+        }
+    }
+
+    & #pageNavToggle {
+        display: none;
+    }
+
+    & .page-nav-toggle {
+        aspect-ratio: 1;
+        max-height: min-content;
+        cursor: pointer;
     }
 
     & .menu-icon {
-        aspect-ratio: 1;
+        /* aspect-ratio: 1; */
         width: 30px;
         box-shadow: none;
         transition: opacity .3s ease;
@@ -94,25 +106,24 @@ a {
 }
 
 .page-nav {
-    height: 100%;
+    color: white;
+    height: 0;
     overflow: hidden;
     background-color: #222;
     grid-area: nav;
-    padding: 30px 0;
+    /* padding: 30px 0; */
     font-weight: 200;
     display: flex;
     /* flex-direction: column; */
     justify-content: space-around;
-    transition: width .3s ease;
-
-    & a {
-        color: white;
-    }
+    align-items: center;
+    transition: height 1s ease, padding 1s ease;
 
     & > ul {
         list-style-type: none;
         display: flex;
         gap: 20px;
+        overflow: hidden;
 
         & > li {
             font-size: 16px;
@@ -121,8 +132,29 @@ a {
             gap: 20px;
             transition: all .3s ease;
             padding: 10px 20px;
-            &:hover {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            /* &:hover {
                 background-color: var(--primary-blue);
+            } */
+
+            &::before {
+                content: "";
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                background-color: var(--primary-blue);
+                transition: all .5s ease;
+                position: absolute;
+                top: 0;
+                right: 100%;
+                z-index: -1;
+            }
+
+            &:not(:active):hover::before {
+                opacity: 1;
+                transform: translateX(100%);
             }
         }
 
@@ -134,10 +166,12 @@ a {
     }
 
     & .reg-buttons {
+        overflow: hidden;
         display: flex;
         gap: 30px;
         padding: 0 20px;
         & a[id] {
+            width: max-content;
             font-weight: 500;
             background-color: var(--primary-blue);
             border-radius: 30px;
@@ -151,20 +185,22 @@ a {
                 color: var(--primary-blue);
             }
 
-            &:not(:active):hover::before {
-                transform: translateX(100%);
-            }
-
             &::before {
                 content: "";
+                opacity: 0;
                 width: 100%;
                 height: 100%;
                 background-color: white;
-                transition: transform .5s ease;
+                transition: all .5s ease;
                 position: absolute;
                 top: 0;
                 right: 100%;
                 z-index: -1;
+            }
+
+            &:not(:active):hover::before {
+                opacity: 1;
+                transform: translateX(100%);
             }
         }
     }
@@ -185,7 +221,7 @@ a {
 
 .main-content {
     grid-area: main;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     & .intro-title {
         font-size: 50px;
         margin: 30px 0;
