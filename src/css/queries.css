@@ -1,0 +1,44 @@
+@media (width <= 55rem) {
+
+    body {
+        /* background-color: red; */
+        
+        grid-template-columns: 1fr;
+        grid-template-rows: min-content 16rem 1fr;
+        grid-template-areas: 
+            "header"
+            "nav"
+            "main"
+        ;
+    }
+
+    body:has(#pageNavToggle:checked) {
+        grid-template-rows: min-content 0 1fr;
+    }
+
+    .page-nav {
+        padding: 0;
+        height: 100%;
+
+        justify-content: space-evenly;
+
+        & > ul,
+        & .reg-buttons {
+            flex-direction: row;
+        }
+
+        & > ul {
+            align-items: center;
+            justify-content: center;
+        }
+
+        & .reg-buttons {
+            justify-content: center;
+        }
+
+        & .page-nav--links {
+            padding: 1em 2em;
+        }
+
+    }
+}

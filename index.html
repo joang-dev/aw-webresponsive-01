@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/queries.css">
     <title>Web Responsive 01</title>
 </head>
 <body id="noNav">
@@ -11,24 +12,31 @@
         <img class="page-logo" src="src/assets/web-logo.png" alt="Logo de la página">
         <h1 class="page-title">Proyecto Web Responsive 01</h1>
         <label class="page-nav-toggle" for="pageNavToggle">
-            <img class="menu-icon" src="src/assets/icons/menu-line.svg" alt="Icono menú desplegable">
+            <!-- <img class="menu-icon" src="src/assets/icons/menu-line.svg" alt="Icono menú desplegable"> -->
+            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path></svg>
         </label>
-        <input id="pageNavToggle" type="checkbox" name="">
+        <input id="pageNavToggle" type="checkbox" checked name="">
         </a>
         </header>
     <nav class="page-nav">
         <ul>
             <li>
-                <img class="nav-icons" src="src/assets/icons/home-2-line.svg" alt="Icono">
-                <a href="#">Inicio</a>
+                <a class="page-nav--links" href="#">
+                    <img class="nav-icons" src="src/assets/icons/home-2-line.svg" alt="Icono">
+                    Inicio
+                </a>
             </li>
             <li>
-                <img class="nav-icons" src="src/assets/icons/team-line.svg" alt="Icono">
-                <a href="#">Sobre Nosotros</a>
+                <a class="page-nav--links" href="#">
+                    <img class="nav-icons" src="src/assets/icons/team-line.svg" alt="Icono">
+                    Sobre Nosotros
+                </a>
             </li>
             <li>
-                <img class="nav-icons" src="src/assets/icons/contacts-book-3-line.svg" alt="Icono">
-                <a href="#">Contacto</a>
+                <a class="page-nav--links" href="#">
+                    <img class="nav-icons" src="src/assets/icons/contacts-book-3-line.svg" alt="Icono">
+                    Contacto
+                </a>
             </li>
         </ul>
         <div class="reg-buttons">

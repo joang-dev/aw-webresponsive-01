@@ -1,0 +1,38 @@
+:root {
+    --primary-blue: #1a3486;
+    --primary-light: #ffffff;
+    --transition-padding: padding .5s ease;
+    --header-height: 75px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: currentColor;
+}
+
+a,
+img,
+svg,
+video {
+    user-select: none;
+}
+
+body {
+    min-height: 100dvh;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+ul, ol{
+    list-style-type: none;
+}
